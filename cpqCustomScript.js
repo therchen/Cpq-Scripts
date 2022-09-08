@@ -22,15 +22,15 @@ export function onBeforeCalculate(quote, quoteLines, conn) {
 export function onAfterCalculate(quote, quoteLines, conn) {
     const config = new Config();
     if (config.doAfterCalculate) {
-        calculateCfAndSp(quote, quoteLines, conn);
-        //calculateSp(quote, quoteLines, conn);
+        //calculateCfAndSp(quote, quoteLines, conn);
+        calculateSp(quote, quoteLines, conn);
     }
 	return Promise.resolve();
 };
 export function onAfterPriceRules(quote, quoteLines, conn) {
     const config = new Config();
     if (config.doAfterPriceRules) {
-        //calculateCf(quote, quoteLines, conn);
+        calculateCf(quote, quoteLines, conn);
     }
 	return Promise.resolve();
 }
@@ -58,7 +58,7 @@ class Config {
         this.doBeforePriceRules = false;
         this.doBeforeCalculate = false;
         this.doAfterCalculate = true;
-        this.doAfterPriceRules = false;
+        this.doAfterPriceRules = true;
 		this.cfRateTransform = {
 			Custom: 0.0100,
 			Monthly: 0.0100,
