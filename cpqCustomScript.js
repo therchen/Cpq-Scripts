@@ -5,6 +5,30 @@
 -Thereforce is it org specific, but can be modified to apply to general POT products as well
 https://developer.salesforce.com/docs/atlas.en-us.cpq_dev_plugins.meta/cpq_dev_plugins/cpq_dev_jsqcp_methods.htm
 */
+
+/*This class controls the behavior of this entire script. Use the boolean values to turn it on/off*/
+class Config {
+    constructor() {
+        this.doInit = true;
+        this.doBeforePriceRules = false;
+        this.doBeforeCalculate = false;
+        this.doAfterCalculate = true;
+        this.doAfterPriceRules = true;
+		this.cfRateTransform = {
+			Custom: 0.0100,
+			Monthly: 0.0100,
+			Quarterly: 0.0075,
+			Semiannual: 0.0050
+		};
+		this.cfProductCode = 'ADDONS-CVFE';
+		this.spRateTransform = {
+			'SUPPRT-SILVER': 0.10,
+			'SUPPRT-GOLD': 0.15,
+			'SUPPRT-PLATINUM': 0.2
+		};
+	}
+}
+
 export function onInit(quoteLines, conn) {
     const config = new Config();
     if (config.doInit) {
@@ -58,27 +82,7 @@ function resetCfAndSp(quoteLines, conn) {
     }
 }
 
-class Config {
-    constructor() {
-        this.doInit = true;
-        this.doBeforePriceRules = false;
-        this.doBeforeCalculate = false;
-        this.doAfterCalculate = true;
-        this.doAfterPriceRules = true;
-		this.cfRateTransform = {
-			Custom: 0.0100,
-			Monthly: 0.0100,
-			Quarterly: 0.0075,
-			Semiannual: 0.0050
-		};
-		this.cfProductCode = 'ADDONS-CVFE';
-		this.spRateTransform = {
-			'SUPPRT-SILVER': 0.10,
-			'SUPPRT-GOLD': 0.15,
-			'SUPPRT-PLATINUM': 0.2
-		};
-	}
-}
+
 
 
 function setDisableProration(quoteLines, conn) {
