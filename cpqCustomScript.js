@@ -1,4 +1,10 @@
-//https://developer.salesforce.com/docs/atlas.en-us.cpq_dev_plugins.meta/cpq_dev_plugins/cpq_dev_jsqcp_methods.htm
+/*
+-This script helps solve built-in limitations with CPQ Percent of Total products. 
+-Percent of Total products have a large constraint: The percent is only calculated on year 1.
+-The solution in this script is to fix Percentage of Total calculation for 2 specific products.
+-Thereforce is it org specific, but can be modified to apply to general POT products as well
+https://developer.salesforce.com/docs/atlas.en-us.cpq_dev_plugins.meta/cpq_dev_plugins/cpq_dev_jsqcp_methods.htm
+*/
 export function onInit(quoteLines, conn) {
     const config = new Config();
     if (config.doInit) {
